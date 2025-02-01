@@ -1,9 +1,13 @@
 import './App.css'
+import Home from './home';
 
 function App() {
   return (
-    <>My new app</>
+    <>
+      <h1>Simple spend</h1>
+      <Home />
+    </>
   )
 }
 
-export default App
+export default App;
