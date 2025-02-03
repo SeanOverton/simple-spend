@@ -7,5 +7,6 @@ export interface Currency {
 export interface Bucket {
         amount: number;
         title: string;
+        expensesAmount?: number;
 };
 

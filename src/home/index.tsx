@@ -1,11 +1,13 @@
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { Currency } from "@/types";
+import { Bucket, Currency } from "@/types";
 import { CURRENCIES } from "@/constants";
 import WeeklyBudget from "@/components/weeklyBudget";
 import { useForm } from "react-hook-form";
 import { Card } from "@/components/ui/card";
 import { CustomCard } from "@/components/ui/customCard";
+import { Expenses } from "@/components/expense";
+import { BucketGroup } from "@/components/ui/bucketGroup";
 
 const enum Frequency {
         daily = 1,
@@ -22,6 +24,8 @@ interface FormInputs {
 
 const Home = () => {
         const [currency, setCurrency] = useState<Currency>(CURRENCIES.AUD);
+
+        const [buckets, setBuckets] = useState<Bucket[]>([]);
 
         const {
                 register,
@@ -94,7 +98,14 @@ const Home = () => {
                         <WeeklyBudget
                                 annualSalary={annualSalaryAfterTax}
                                 currency={currency}
+                                buckets={buckets}
+                                setBuckets={setBuckets}
                         />
+                        <BucketGroup
+                                buckets={buckets}
+                                setBuckets={setBuckets}
+                        />
+                        <Expenses buckets={buckets} setBuckets={setBuckets} />
                 </>
         )
 }

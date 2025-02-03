@@ -6,13 +6,15 @@ interface BucketProps {
         name: string;
         amount: number;
         handleDelete: (title: string) => void;
+        expensesAmount?: number;
 };
 
-export const Bucket: FC<BucketProps> = ({ handleDelete, name, amount }) => {
+export const Bucket: FC<BucketProps> = ({ expensesAmount, handleDelete, name, amount }) => {
         return (
                 <Card className="p-2 flex flex-col gap-1 items-center">
                         <div>{name}</div>
                         <div>Amount: {amount}</div>
+                        <div>Spent: {expensesAmount}</div>
                         <Button onClick={() => handleDelete(name)}>
                                 Remove
                         </Button>

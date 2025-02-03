@@ -1,6 +1,5 @@
 import { Currency, Bucket as BucketType } from "@/types";
-import { useState, FC } from "react";
-import { Bucket } from "@/components/ui/bucket";
+import { FC, Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -9,13 +8,13 @@ import { Button } from "@/components/ui/button";
 interface WeeklyBudgetProps {
         annualSalary: number;
         currency: Currency;
+        buckets: BucketType[];
+        setBuckets: Dispatch<SetStateAction<BucketType[]>>;
 }
 
-const WeeklyBudget: FC<WeeklyBudgetProps> = ({ annualSalary, currency }) => {
+const WeeklyBudget: FC<WeeklyBudgetProps> = ({ buckets, setBuckets, annualSalary, currency }) => {
         const { format: formatLocalCurrency } = currency;
         const weeklyTotal = Math.round(annualSalary / 52);
-
-        const [buckets, setBuckets] = useState<BucketType[]>([]);
 
         const { register, reset, watch } = useForm<BucketType>();
 
@@ -37,10 +36,6 @@ const WeeklyBudget: FC<WeeklyBudgetProps> = ({ annualSalary, currency }) => {
 
         const totalSum = buckets.reduce((acc, cur) => acc + cur.amount, 0);
 
-        const handleDeleteBucket = (title: string): void => {
-                setBuckets(prev => prev.filter(b => b.title !== title));
-        };
-
         return (
                 <Card className="p-6 m-6 flex flex-col gap-4 items-center">
                         <h3 className="text-3xl font-medium">Weekly Budget</h3>
@@ -55,14 +50,6 @@ const WeeklyBudget: FC<WeeklyBudgetProps> = ({ annualSalary, currency }) => {
                                 <Input {...register("amount")} placeholder="100" type="number" />
                         </div>
                         <Button onClick={handleAddBucket}>Add bucket</Button>
-                        <div className="flex gap-4 flex-wrap">
-                                {buckets.map(({ title, amount }) =>
-                                        <Bucket
-                                                name={title}
-                                                amount={amount}
-                                                handleDelete={handleDeleteBucket}
-                                        />)}
-                        </div>
                 </Card>
         )
 };
