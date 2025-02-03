@@ -4,7 +4,7 @@ import Home from './home';
 function App() {
   return (
     <>
-      <h1>Simple spend</h1>
+      <h1 className='text-4xl font-semibold'>Simple spend</h1>
       <Home />
     </>
   )
