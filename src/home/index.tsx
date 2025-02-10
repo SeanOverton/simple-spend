@@ -4,10 +4,10 @@ import { Bucket, Currency } from "@/types";
 import { CURRENCIES } from "@/constants";
 import WeeklyBudget from "@/components/weeklyBudget";
 import { useForm } from "react-hook-form";
-import { Card } from "@/components/ui/card";
 import { CustomCard } from "@/components/ui/customCard";
 import { Expenses } from "@/components/expense";
 import { BucketGroup } from "@/components/ui/bucketGroup";
+import { ExpenseSummary } from "@/components/expenseSummary";
 
 const enum Frequency {
         daily = 1,
@@ -100,6 +100,10 @@ const Home = () => {
                                 currency={currency}
                                 buckets={buckets}
                                 setBuckets={setBuckets}
+                        />
+                        <ExpenseSummary
+                                buckets={buckets}
+                                totalBudget={parseInt(watch('rawPay'))}
                         />
                         <BucketGroup
                                 buckets={buckets}

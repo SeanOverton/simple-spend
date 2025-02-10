@@ -1,9 +1,10 @@
-import { Dispatch, FC, SetStateAction } from "react";
-import { Bucket } from "@/types";
+import { useState, Dispatch, FC, SetStateAction } from "react";
+import { Bucket, Transaction } from "@/types";
 import { CustomCard } from "@/components/ui/customCard";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
+import { Transactions } from "@/components/transactions";
 
 interface ExpensesProps {
         buckets: Bucket[];
@@ -20,10 +21,11 @@ export const Expenses: FC<ExpensesProps> = ({
         setBuckets
 }) => {
         const { register, watch } = useForm<ExpenseForm>();
+        const [transactions, setTransactions] = useState<Transaction[]>([]);
 
         const handleAddExpense = () => {
                 const category = watch('category');
-                const amount = parseInt(watch('amount'));
+                const amount: number = parseInt(watch('amount'));
 
                 const curBucket = buckets.find(b => b.title === category);
 
@@ -49,5 +51,8 @@ export const Expenses: FC<ExpensesProps> = ({
                 </select>}
                 <Input className="bg-white w-[50%]" placeholder="amount" {...register("amount")} />
                 <Button onClick={handleAddExpense}>Add expense</Button>
+                <Transactions
+                        transactions={transactions}
+                />
         </CustomCard>);
 };

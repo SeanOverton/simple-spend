@@ -10,3 +10,8 @@ export interface Bucket {
         expensesAmount?: number;
 };
 
+export interface Transaction {
+        category: string; // bucket title
+        amount: number;
+        date: number;
+};
