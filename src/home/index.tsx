@@ -9,7 +9,7 @@ import { Expenses } from "@/components/expense";
 import { BucketGroup } from "@/components/ui/bucketGroup";
 import { ExpenseSummary } from "@/components/expenseSummary";
 
-const enum Frequency {
+export const enum Frequency {
         daily = 1,
         weekly = 2,
         fortnightly = 3,
@@ -108,6 +108,7 @@ const Home = () => {
                         <BucketGroup
                                 buckets={buckets}
                                 setBuckets={setBuckets}
+                                frequency={parseInt(watch("frequency"))}
                         />
                         <Expenses buckets={buckets} setBuckets={setBuckets} />
                 </>

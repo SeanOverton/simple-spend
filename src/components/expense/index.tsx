@@ -29,6 +29,12 @@ export const Expenses: FC<ExpensesProps> = ({
 
                 const curBucket = buckets.find(b => b.title === category);
 
+                setTransactions(prev => [...prev, {
+                        date: new Date().getTime(),
+                        amount,
+                        category
+                }])
+
                 setBuckets(
                         prev => [
                                 ...prev.filter((b) => b !== curBucket),
